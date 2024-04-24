@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa"; // Importa los iconos que necesitas
+import { FaUser, FaEye, FaEyeSlash } from "react-icons/fa"; // Importa los iconos que necesitas
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -22,52 +22,47 @@ function LoginPage() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center w-full dark: bg-blue-50">
-      <div className="bg-white ligth:bg-gray-900 shadow-md rounded-lg px-8 py-6 max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-4 light:text-gray-200">
-          Login
-        </h2>
-        <form onSubmit={handleLogin} className="flex flex-col">
+    <section className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded shadow-md w-96">
+        <h1 className="text-2xl font-semibold mb-4">Iniciar sesión</h1>
+        <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label
-              className="block text-sm font-medium text-gray-700 light:text-gray-300 mb-2"
               htmlFor="username"
+              className="block text-sm font-medium text-gray-700"
             >
-              Username
+              Nombre de usuario
             </label>
             <div className="relative">
-              <FaUser className="absolute top-3 left-3 text-gray-400" />
               <input
                 type="text"
                 id="username"
-                className="pl-8 shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="Your Username"
+                className="mt-1 p-2 w-full border rounded"
+                placeholder="Ingresa tu nombre de usuario"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                required
               />
+              <FaUser className="absolute right-4 top-4 text-gray-400" />
             </div>
           </div>
           <div className="mb-4">
             <label
-              className="block text-sm font-medium text-gray-700 light:text-gray-300 mb-2"
               htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
             >
-              Password
+              Contraseña
             </label>
             <div className="relative">
-              <FaLock className="absolute top-3 left-3 text-gray-400" />
               <input
-                type={showPassword ? "text" : "password"} // Muestra/oculta la contraseña
+                type={showPassword ? "text" : "password"}
                 id="password"
-                className="pl-8 shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="Your password"
+                className="mt-1 p-2 w-full border rounded"
+                placeholder="Ingresa tu contraseña"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
               />
               <div
-                className="absolute top-3 right-3 cursor-pointer"
+                className="absolute top-4 right-4 cursor-pointer"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
@@ -79,15 +74,13 @@ function LoginPage() {
             </div>
           </div>
           <button
-            className={`p-2 text-white rounded ${
-              isFormComplete
-                ? "bg-blue-800 hover:bg-blue-900"
-                : "bg-gray-500 cursor-not-allowed"
-            }`}
             type="submit"
-            disabled={!isFormComplete}
+            className={`bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 ${
+              !username || !password ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            disabled={!username || !password}
           >
-            Login
+            Iniciar sesión
           </button>
         </form>
       </div>
